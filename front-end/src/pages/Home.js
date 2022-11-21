@@ -16,11 +16,12 @@ function Home() {
    const token = localStorage.getItem("token");
 
    const fetchData = async () => {
-      axios.defaults.headers.common["Authorization"] = "bearer ${token}";
+      axios.defaults.headers.common["Authorization"] = `bearer ${token}`;
       await axios.post("http://127.0.0.1:8000/api/auth/me").then((response) => {
          setUser(response.data);
       });
    };
+   
 
    useEffect(() => {
       if (!token) {
@@ -30,7 +31,7 @@ function Home() {
    }, []);
 
    const logoutHandler = async () => {
-      axios.defaults.headers.common["Authorization"] = "bearer ${token}";
+      axios.defaults.headers.common["Authorization"] = `bearer ${token}`;
       await axios.post("http://127.0.0.1:8000/api/auth/logout").then(() => {
          localStorage.removeItem("token");
          navigate("/");
